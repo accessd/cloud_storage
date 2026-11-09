@@ -45,7 +45,7 @@ jobs:
         run: |
           for i in $(seq 1 30); do
             curl -sfI --aws-sigv4 aws:amz:us-east-1:s3 --user minioadmin:minioadmin http://localhost:9000/test \
-              && curl -sf http://localhost:8080/ && exit 0
+              && curl -sf "http://localhost:8080/storage/v1/b/$GCS_BUCKET" >/dev/null && exit 0
             sleep 1
           done
           echo "SeaweedFS or fake-gcs-server did not become ready" >&2
